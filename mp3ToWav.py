@@ -18,9 +18,10 @@ count = 0
 for (root, dirnames, filenames) in walk(input_folder):                    
     for filename in filenames:
         if filename.endswith('.mp3'):
-            newFileName = filename.stem + '.wav'
-            dest = root + output_folder + newFileName
-            converted = AudioSegment.from_mp3(filename)
+            newFileName = path.basename(filename).split('.')[0] + '.wav'
+            original = input_folder + "/" + filename
+            dest = output_folder + "/" + newFileName
+            converted = AudioSegment.from_mp3(original)
             converted.export(dest, format="wav")
             count = count + 1
 
